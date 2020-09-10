@@ -1,18 +1,55 @@
 ///////////////Menu Items (MVP)///////////////////
 
-const latte = {name: "Cafe Latte", price: 4, category: "Drinks"};
-const burger = {name: "Burger", price: 18, category: "Lunch"};
-const breakfastBurrito = {name: "Breakfast Burrito", price: 16, category:"Breakfast"};
+const latte = {
+name: 'Cafe Latte', 
+price: 4,
+category: 'Drinks'
+};
+
+const burger = {
+name: 'burger',
+price: 18,
+category: 'Lunch',
+discount: function(customer){
+  if (customer === 'teacher' || customer === 'student'){
+    discountedPrice = `${this.price}` * .75;
+  } else{
+    discountedPrice = `${this.price}` * .90; 
+  }
+  return discountedPrice;
+}
+};
+console.log(burger.discount('teacher'));
+
+
+const breakfastBurrito = {
+name: 'Breakfast Burrito',
+price: 16,
+category: 'Breakfast'
+};
+
 
 /* Task 1a: write a function to return more menu items with the same format as the items above. */
 
 function createMenuItem(name, cost, category){
-    /* Code here */
+  newMenuItem = {
+    name: name,
+    cost: cost,
+    category: category
+  }
+  return newMenuItem;
 }
 
 /* Task 1b: use your function to create 3 more menu items. You may add any items to the menu that you'd like */
 
+let hotdog = createMenuItem('Hotdog', '$' + 2 +' Dollars', 'Lunch');
+console.log(hotdog);
 
+let sausageBiscuit = createMenuItem('Sausage Biscuit', '$' + 1 + ' Dollars', 'Breakfast');
+console.log(sausageBiscuit);
+
+let steak = createMenuItem('Steak', '$' + 12 + ' Dollars', 'Dinner');
+console.log(steak);
 
 /* Task 2: You're having a lunch special! 25% off for teachers and students, 10% off for everyone else. Add a method to your burger object that automatically calculates price given a string as a parameter. 
 
@@ -39,12 +76,33 @@ const reviews = [{name: "Daniela", rating: 5, feedback:"Beautiful atmosphere and
 ]
 
 /* Task 3: Console.log just Julius' feedback */
-
+for(let i = 0; i < reviews.length; i++){
+  if(reviews[i].name === "Julius"){
+    console.log(reviews[i].feedback);
+  }
+}
 
 /* Task 4: Add a new rating with your (fictitious) opinions of the restaurant in the same format as the reviews above. */
+function newRatingItem(name, rating, feedback){
+  newRating = [{
+    name:  name,
+    rating: rating,
+    feedback: feedback
+  }]
+  return newRating;
+}
 
+let myReview = newRatingItem('Brandon', 5.0, 'I am only here for the coffee and it was great so...');
+console.log(myReview)
 
-/* Task 5: Add the following feedback to Reyna's rating - "this place is chill with really cool people, great for getting work done on weekdays"
+/* Task 5: Add the following feedback to Reyna's rating - "this place is chill with really cool people, great for getting work done on weekdays" */
+
+for(let i = 0; i < reviews.length; i++){
+  if(reviews[i].name === "Reyna"){
+    reviews.feedback = "'this place is chill with really cool people, great for getting work done on weekdays.'"
+    console.log(reviews.feedback);
+  }
+};
 
 /*  Task 6: Write a function to return a review based on the index of the review in the array.
 
@@ -58,10 +116,11 @@ and should return a string in the format `{name} gave the restaurant a {rating},
  * For example, if getReviewByIndex is invoked with reviews and the number 0
  * it will return `Daniela gave the restaurant a 5 star review and their feedback was: Beautiful atmosphere and wonderful vegan options!`
 */
+
 function getReviewByIndex(reviews, index) {
-    /* code here */
+  return `${reviews[index].name} gave the resteraunt a ${reviews[index].rating} star review and their feedback was: ${reviews[index].feedback}`
   }
-  
+  console.log(getReviewByIndex(reviews, 2))
 
 /* Task 7: Write a function to get information about the most recent review called `getLastReview`
 
